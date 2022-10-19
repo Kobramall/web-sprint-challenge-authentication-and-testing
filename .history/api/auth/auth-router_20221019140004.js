@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const {  JWT_SECRET } = require('../../data/config')
 const { checkUsername } = require('../middleware/restricted')
 
-router.post('/register',  async (req, res, next) => {
+router.post('/register', checkUsername, async (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.

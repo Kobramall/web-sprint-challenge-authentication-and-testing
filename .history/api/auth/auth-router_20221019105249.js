@@ -14,7 +14,7 @@ router.post('/register', async (req, res, next) => {
         "username": "Captain Marvel", // must not exist already in the `users` table
         "password": "foobar"          // needs to be hashed before it's saved
       }
-     
+
     2- On SUCCESSFUL registration,
       the response body should have `id`, `username` and `password`:
       {

@@ -37,8 +37,6 @@ async function checkUsername(req, res, next) {
     }else{
       next({ status: 422, message: 'username taken'})
     }
-  }catch(err){
-    next(err)
   }
 }
 

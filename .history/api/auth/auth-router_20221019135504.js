@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const {  JWT_SECRET } = require('../../data/config')
 const { checkUsername } = require('../middleware/restricted')
 
-router.post('/register', checkUsername, async (req, res, next) => {
+router.post('/register', checkeUsername, async (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -34,11 +34,15 @@ router.post('/register', checkUsername, async (req, res, next) => {
       const { username, password } = req.body
       const hash = bcrypt.hashSync(password, 8)
       if(username && password){
+            if(User.findBy(username).username !== username){
               User.add({ username, password: hash})
         .then(saved =>{
           res.status(201).json(saved)
         })
         .catch(next({ status: 401, message: 'register failed'}))
+            }else{
+              next({ status: 401, message: 'username taken'})
+            }
       }else{
         next({ status: 401, message: 'username and password required'})
       }

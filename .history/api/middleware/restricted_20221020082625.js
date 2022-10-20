@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const { JWT_SECRET} = require('../../data/config')
 
 
-function restrict(req, res, next){
+function restricted(req, res, next){
   /*
     IMPLEMENT
 
@@ -31,4 +31,4 @@ function restrict(req, res, next){
 
 
 
-module.exports = { restrict }
+module.exports = { restricted }

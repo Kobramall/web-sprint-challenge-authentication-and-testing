@@ -6,7 +6,7 @@ async function add(user){
 }
 
 function findBy(user){
-    return db('users').where(user).first()
+    return db('users').select('username', 'password').where(user).first()
 }
 
 module.exports = {

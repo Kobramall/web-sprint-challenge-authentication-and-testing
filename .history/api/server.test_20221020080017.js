@@ -1,8 +1,6 @@
 // Write your tests here
 const db = require('../data/dbConfig')
 const User = require('../api/auth/auth.model')
-const request = require('supertest')
-const server = require('./server')
 
 beforeAll(async ()=>{
   await db.migrate.rollback()
@@ -21,19 +19,12 @@ describe('Testing auth.model function', () =>{
     User.add(user)
     expect(await db('users')).toHaveLength(1)
   })
-    test.skip('findBy finds a user by username', ()=>{
+    test('findBy finds a user by username', ()=>{
       User.add(user)
       User.add({username: 'BramNation', password:'123'})
-      expect(User.findBy({username: 'BramNation'})).toBe({id:3, username: 'BramNation', password:'123'})
-    })   
-})
-
-describe('Registering a new account works', ()=>{
-  const user = { username: 'BramBoy', password: 'BramaBoy21'}
-  test('A new user is Registered', async ()=>{
-     await request(server).post('/register').send(user)
-    expect(await db('users')).toHaveLength(1)
-  })
+      expect(User.findBy({username: 'BramNation'})).toBe({id:1, username: 'BramNation', password:'123'})
+    })  
+   
 })
 
 

@@ -32,7 +32,7 @@ describe('Registering a new account works', ()=>{
   const user = { username: 'BramBoy', password: 'BramaBoy21'}
   test('A new user is Registered', async ()=>{
      await request(server).post('/register').send(user)
-    expect(await db('users')).toHaveLength(1)
+    expect(await db('users')).toHaveLength(2)
   })
 })
 

@@ -42,7 +42,7 @@ router.post('/register', checkUserTaken, (req, res, next) => {
 });
 
 
-router.post('/login',  (req, res) => {
+router.post('/login', checkUsernameExists, (req, res, next) => {
      let { username, password } = req.body;
      User.findBy({username: req.body.username})
      .first()

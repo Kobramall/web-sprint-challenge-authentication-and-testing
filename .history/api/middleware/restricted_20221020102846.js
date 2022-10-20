@@ -58,4 +58,4 @@ const checkUserTaken = async (req, res, next) =>{
 
 
 
-module.exports = { restrict, checkUsernameExists, checkUserTaken }
+module.exports = { restrict, checkUsernameExists }

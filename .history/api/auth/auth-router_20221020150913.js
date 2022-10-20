@@ -38,7 +38,7 @@ router.post('/register', checkUserTaken, (req, res, next) => {
         .then(saved =>{
           res.status(201).json(saved)
         })
-        .catch(next({message: 'username and password required'}))
+        .catch(next)
 });
 
 

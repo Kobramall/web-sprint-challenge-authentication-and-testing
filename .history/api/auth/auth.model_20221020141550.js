@@ -7,7 +7,6 @@ async function add(user){
 
 function findBy(user){
     return db('users').where(user)
-}
 
 module.exports = {
     add, 

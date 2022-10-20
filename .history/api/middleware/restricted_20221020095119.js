@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET} = require('../../data/config')
-const User = require('../auth/auth.model')
 
 
 function restrict(req, res, next){
@@ -30,19 +29,6 @@ function restrict(req, res, next){
      }
 }
 
-const checkUsernameExists = async (req, res, next) => {
-  try{
-    const [user] = await User.findBy({ username: req.body.username})
-    if(!user){
-      next({status: 422, message: 'invalid credentials'})
-    }else{
-      req.user = user
-    }
-  }catch(err){
-    next(err)
-  }
-}
 
 
-
-module.exports = { restrict, checkUsernameExists }
+module.exports = { restrict }

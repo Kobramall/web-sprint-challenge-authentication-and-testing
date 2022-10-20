@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const User = require('./auth.model')
 const jwt = require('jsonwebtoken')
 const {  JWT_SECRET } = require('../../data/config')
-const { checkUsernameExists } = require('../middleware/restricted')
 
 
 router.post('/register', async (req, res, next) => {
@@ -41,23 +40,15 @@ router.post('/register', async (req, res, next) => {
         .catch(next)
 });
 
-router.post('/login', checkUsernameExists, (req, res, next) => {
-  
-    if(bcrypt.compareSync(req.body.password, req.user.password)){
-      const token = buildToken(req.user)
-      res.json({
-        message: `welcome, ${req.user.username}`, token
-      })
-    }else{
-      next({ status: 401, message: 'invalid credentials'})
-    }
-  
-  
-  
-  
-  
-  
- 
+router.post('/login', (req, res, next) => {
+  if(bcrypt.compareSync(req.body.password, req.user.password)){
+    const token = buildToken(req.user)
+    res.json({
+      message: `welcome, ${req.user.username}`, token
+    })
+  }else{
+    next({ status: 401, message: 'invalid credentials'})
+  }
      
   /*
     IMPLEMENT

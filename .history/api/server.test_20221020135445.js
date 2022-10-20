@@ -25,6 +25,9 @@ describe('[1]Testing auth.model function', () =>{
     User.add(user)
     expect(await db('users')).toHaveLength(4)
   })
+  test('add shows new user', async ()=>{
+    expect(User.add(user)).toBe(user)
+  })
     test.skip('findBy finds a user by username', ()=>{
       expect(User.findBy('BramNation')).toBe({id:3, username: 'BramNation', password:'123'})
     })   

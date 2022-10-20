@@ -25,13 +25,16 @@ describe('[1]Testing auth.model function', () =>{
     User.add(user)
     expect(await db('users')).toHaveLength(4)
   })
+  test('add shows new user', async ()=>{
+    expect(User.add(user)).toBe(user)
+  })
     test.skip('findBy finds a user by username', ()=>{
       expect(User.findBy('BramNation')).toBe({id:3, username: 'BramNation', password:'123'})
     })   
 })
 
 describe('[2]Registering a new account works', ()=>{
-  const user = {username: 'BramBoy', password: 'BramaBoy21'}
+  const user = { username: 'BramBoy', password: 'BramaBoy21'}
   test('A new user is Registered', async ()=>{
      await request(server).post('/register').send(user)
     expect(await db('users')).toHaveLength(3)

@@ -45,9 +45,9 @@ const checkUsernameExists = async (req, res, next) => {
 
 const checkUserTaken = async (req, res, next) =>{
   try{
-    
-    const user = await User.findBy(req.body.username)
-    if(user.length){
+    console.log(req.body.username)
+    const [user] = await User.findBy(req.body.username)
+    if(user){
       next({status: 422, message: 'username taken'})
     }else{
       next()

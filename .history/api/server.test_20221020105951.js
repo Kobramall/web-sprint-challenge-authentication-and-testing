@@ -19,18 +19,20 @@ describe('Just a sanity test', ()=>{
   })
 })
 
-describe('[1]Testing auth.model function', () =>{
+describe('Testing auth.model function', () =>{
   const user = {username: 'BramBoy', password: 'BramaBoy21'}
   test('add function add a new user to users database', async ()=>{
     User.add(user)
     expect(await db('users')).toHaveLength(4)
   })
     test('findBy finds a user by username', ()=>{
-      expect(User.findBy('BramNation')).toContainEqual({id:3, username: 'BramNation', password:'123'})
+      User.add(user)
+      User.add({username: 'BramNation', password:'123'})
+      expect(User.findBy('BramNation')).toBe({id:3, username: 'BramNation', password:'123'})
     })   
 })
 
-describe('[2]Registering a new account works', ()=>{
+describe('Registering a new account works', ()=>{
   const user = { username: 'BramBoy', password: 'BramaBoy21'}
   test('A new user is Registered', async ()=>{
      await request(server).post('/register').send(user)
@@ -38,7 +40,7 @@ describe('[2]Registering a new account works', ()=>{
   })
 })
 
-describe('[3]Login in works', ()=>{
+describe('Login in works', ()=>{
   const user = { username: 'BramBoy', password: 'BramaBoy21'}
   test.skip('User can log in', async ()=>{
     await request(server).post('/register').send(user)

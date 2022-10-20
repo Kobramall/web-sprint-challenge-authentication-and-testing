@@ -26,7 +26,7 @@ describe('[1]Testing auth.model function', () =>{
     expect(await db('users')).toHaveLength(4)
   })
     test('findBy finds a user by username', ()=>{
-      expect(User.findBy('BramNation')).toContainEqual({id:3, username: 'BramNation', password:'123'})
+      expect(User.findBy('BramNation')).toBe({id:3, username: 'BramNation', password:'123'})
     })   
 })
 
@@ -34,7 +34,7 @@ describe('[2]Registering a new account works', ()=>{
   const user = { username: 'BramBoy', password: 'BramaBoy21'}
   test('A new user is Registered', async ()=>{
      await request(server).post('/register').send(user)
-    expect(await db('users')).toHaveLength(4)
+    expect(await db('users')).toHaveLength(3)
   })
 })
 

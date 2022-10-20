@@ -6,7 +6,7 @@ const {  JWT_SECRET } = require('../../data/config')
 const { checkUsernameExists } = require('../middleware/restricted')
 
 
-router.post('/register', (req, res, next) => {
+router.post('/register', async (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -40,7 +40,6 @@ router.post('/register', (req, res, next) => {
         })
         .catch(next)
 });
-
 
 router.post('/login', checkUsernameExists, (req, res, next) => {
   

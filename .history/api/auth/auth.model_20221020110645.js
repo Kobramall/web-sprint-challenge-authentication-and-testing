@@ -5,8 +5,8 @@ async function add(user){
     return db('users').where('id', id).first()
 }
 
-function findBy(user){
-    return db('users').where('username', user).first()
+async function findBy(user){
+    return await db('users').where(user).first()
 }
 
 module.exports = {

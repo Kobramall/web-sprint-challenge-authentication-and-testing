@@ -3,10 +3,10 @@ const bcrypt = require('bcryptjs');
 const User = require('./auth.model')
 const jwt = require('jsonwebtoken')
 const {  JWT_SECRET } = require('../../data/config')
-const { checkUsernameExists, checkUserTaken, validInput } = require('../middleware/restricted')
+const { checkUsernameExists, checkUserTaken } = require('../middleware/restricted')
 
 
-router.post('/register', validInput, checkUserTaken, (req, res, next) => {
+router.post('/register', checkUserTaken, (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -42,7 +42,7 @@ router.post('/register', validInput, checkUserTaken, (req, res, next) => {
 });
 
 
-router.post('/login',validInput, checkUsernameExists, (req, res, next) => {
+router.post('/login', checkUsernameExists, (req, res, next) => {
      let { username, password } = req.body;
      if(username && password){
      User.findBy({username: req.body.username})
@@ -58,7 +58,7 @@ router.post('/login',validInput, checkUsernameExists, (req, res, next) => {
       }
      })
     } else{ 
-      next({status:401, message:'username and password required'})
+      next({message:'username and password required'})
     }
   
   

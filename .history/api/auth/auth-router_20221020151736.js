@@ -58,7 +58,7 @@ router.post('/login',validInput, checkUsernameExists, (req, res, next) => {
       }
      })
     } else{ 
-      next({status:401, message:'username and password required'})
+      next({message:'username and password required'})
     }
   
   
